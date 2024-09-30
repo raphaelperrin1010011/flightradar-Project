@@ -1,0 +1,459 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
+
+/* Réinitialiser les marges et les paddings par défaut */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Définir la hauteur et la largeur de la carte pour qu'elle prenne tout l'écran */
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* Style pour le titre */
+h1 {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #000; /* Utilisation de #D1E9F6 pour le texte */
+    text-shadow: black 1px 1px 1px;
+    font-size: 24px;
+    background-color: rgba(200, 50, 200, 0.5); /* Utilisation de #F6EACB avec opacité */
+    padding: 10px 20px;
+    border-radius: 7px;
+    z-index: 2; /* Assurez-vous que le titre est au-dessus de la carte */
+    display: none; /* Masquer le titre jusqu'à ce que le flou disparaisse */
+}
+
+#ready {
+    height: 100%
+}
+
+/* Conteneur pour les boutons */
+.button-container {
+    float: left;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.button-container button {
+    background: none;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.button-container button:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+#dateDisplay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    border: 1px solid black;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    z-index: 1000;
+}
+
+#controls {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    border: 1px solid black;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    z-index: 1000;
+}
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    z-index: 1000;
+}
+
+.sidebar-content {
+    color: white;
+    padding: 20px;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style pour la barre de progression */
+.progress-bar {
+    width: 50%;
+    background-color: rgba(243, 243, 243, 0.8);
+    border: 1px solid #000;
+    border-radius: 5px;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4; /* Assurez-vous que la barre de progression est au-dessus de tout */
+    backdrop-filter: blur(10px); /* Ajouter un effet de flou */
+}
+
+.progress-bar-inner {
+    height: 30px;
+    width: 0;
+    z-index: 3;
+    background-color: #4caf50;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+}
+
+/* Style pour le menu */
+.menu {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.5); /* Couleur blanche avec opacité pour laisser passer le flou */
+    backdrop-filter: blur(5px); /* Effet de flou */
+    border-radius: 10px;
+    padding: 10%;
+    z-index: 2; /* Assure que le menu soit au-dessus de la carte */
+}
+
+.menu p {
+    text-align: center;
+    font-size-adjust: calc(2em + 1vw);
+    font-family: 'Roboto', sans-serif;
+    font-size: 35px;
+    font-weight: 200;
+    z-index: 4;
+    margin-bottom: 1%;
+}
+
+.container-datasets {
+    height: 20em;
+    overflow-y: scroll;
+    padding: 10px;
+}
+
+.datasets {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+#start-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10em;
+    width: 20em;
+}
+
+.datasets button {
+    background-color: #98fb98; /* Couleur verte pâle */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: 200;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif; /* Appliquer la police Roboto */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Ajouter des transitions pour un effet plus fluide */
+}
+
+.datasets button:hover {
+    border: 1px solid darkseagreen;
+    transform: scale(1.1); /* Agrandir légèrement le bouton au survol */
+}
+
+.checkbox-button {
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.checkbox-button input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-button span {
+    display: inline-block;
+    background-color: #98fb98; /* Couleur verte pâle */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 200;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif; /* Appliquer la police Roboto */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Ajouter des transitions pour un effet plus fluide */
+}
+
+.checkbox-button input[type="checkbox"]:checked + span {
+    background-color: #98e8f3;
+    transform: scale(1.1);
+    border: 1px solid darkseagreen;
+}
+
+#aircraftImage img{
+    width: 70%;
+    height: 70%;
+    border-radius: 3%;
+    border : 1px solid white;
+    display: block;
+}
+
+/* Styles pour le conteneur de chargement */
+#loading {
+    display: flex;
+    justify-content: flex-start; /* Aligner le spinner à gauche */
+    align-items: center;
+    height: 60%;
+    padding-left: 20px; /* Ajouter une marge à gauche */
+}
+
+/* Styles pour le spinner */
+.spinner {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px; /* Réduire la largeur */
+    height: 60px; /* Réduire la hauteur */
+    animation: spin 2s linear infinite;
+}
+
+/* Animation pour le spinner */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* Styles pour la barre d'altitude */
+.container {
+    position: fixed; /* Position fixe par rapport à la fenêtre */
+    bottom: 0; /* Caler en bas */
+    right: 0; /* Caler à droite */
+    display: flex;
+    align-items: center;
+    z-index: 1000; /* Assurez-vous que le conteneur est au-dessus des autres éléments */
+}
+
+.altitude-container {
+    width: 100px;
+    height: 300px;
+    border: 2px solid white;
+    background-color: black; /* Fond noir pour le début (quand l'altitude est à 0) */
+    position: relative;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.altitude-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to top, green, yellow, red); /* Le dégradé du bas vers le haut */
+    transition: height 2s ease-in-out; /* Animation de la montée/descente */
+}
+
+.altitude-text {
+    position: absolute; /* Positionnement absolu */
+    bottom: 0; /* Commence en bas */
+    color: white; /* Couleur du texte */
+    font-size: 20px;
+    transition: bottom 2s ease-in-out; /* Animation de la montée/descente du texte */
+    text-align: center;
+    width: 100%; /* Centrer le texte */
+}
+
+.scale {
+    position: absolute;
+    left: -60px; /* Ajuste la position pour placer l'échelle à gauche */
+    top: 0;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Prend toute la hauteur du conteneur */
+}
+
+.scale .tick {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid black;
+    margin: 0; /* Élimine les marges pour un alignement parfait */
+}
+
+
+/* Styles pour l'avion et sa trajectoire */
+
+.glowing-polyline {
+    stroke: rgba(255, 0, 0, 0.7);
+    stroke-width: 4;
+    stroke-linecap: round;
+    animation: glow 2s infinite ease-in-out alternate;
+}
+
+@keyframes glow {
+    from {
+        stroke-opacity: 0.2;
+    }
+    to {
+        stroke-opacity: 0.7;
+    }
+}
+
+#start-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    width: 20%;
+    border: none;
+    border-radius: 5px;
+    margin: auto;
+    font-size: 20px;
+    font-weight: 200;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif; /* Appliquer la police Roboto */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Ajouter des transitions pour un effet plus fluide */
+}
+
+#start-container button {
+    background-color: #98fb98; /* Couleur verte pâle */
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: 200;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif; /* Appliquer la police Roboto */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Ajouter des transitions pour un effet plus fluide */
+}
+
+#start-container button:hover {
+    border: 1px solid darkseagreen;
+    transform: scale(1.1); /* Agrandir légèrement le bouton au survol */
+}
+
+#videoplayer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.modal-content button:hover {
+    background-color: #45a049;
+}

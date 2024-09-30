@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    networks:
+      - app-network
+
+  python-data:
+    build: ./container-data
+    container_name: python-data
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+
+  python-timelapse:
+    build: ./container-timelapse
+    container_name: python-timelapse
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+  
+  php-app:
+    build: ./php-mongodb-app
+    container_name: app-web
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+    ports:
+      - "85:85"
+
+  python-image-api:
+    build: ./container-image-api
+    container_name: python-image-api
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pillow
+numpy
+pandas
+matplotlib
+seaborn
+contextily
+cartopy
+pyproj
+pymongo
+pytz
+tzlocal
