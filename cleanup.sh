@@ -21,4 +21,7 @@ docker volume prune -f
 echo "Suppression des réseaux Docker non utilisés..."
 docker network prune -f
 
+cd airflow
+sh cleanup.sh
+
 echo "Les services Docker Compose et les ressources associées ont été supprimés avec succès."

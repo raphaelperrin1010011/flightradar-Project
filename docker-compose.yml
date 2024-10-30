@@ -5,7 +5,7 @@ services:
     image: mongo:latest
     container_name: mongodb
     networks:
-      - app-network
+      - airflow_app-network
 
   python-data:
     build: ./container-data
@@ -13,7 +13,7 @@ services:
     depends_on:
       - mongodb
     networks:
-      - app-network
+      - airflow_app-network
 
   python-timelapse:
     build: ./container-timelapse
@@ -21,7 +21,7 @@ services:
     depends_on:
       - mongodb
     networks:
-      - app-network
+      - airflow_app-network
   
   php-app:
     build: ./php-mongodb-app
@@ -29,7 +29,7 @@ services:
     depends_on:
       - mongodb
     networks:
-      - app-network
+      - airflow_app-network
     ports:
       - "85:85"
 
@@ -39,8 +39,8 @@ services:
     depends_on:
       - mongodb
     networks:
-      - app-network
+      - airflow_app-network
 
 networks:
-  app-network:
-    driver: bridge
+  airflow_app-network:
+    external: true
