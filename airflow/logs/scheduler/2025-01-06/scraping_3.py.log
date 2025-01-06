@@ -1,0 +1,112 @@
+[2025-01-06T20:56:44.020+0000] {processor.py:161} INFO - Started process (PID=4018) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:56:44.021+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T20:56:44.024+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:56:44.023+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:56:44.036+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:56:44.212+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:56:44.211+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:56:44.232+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:56:44.232+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T20:56:44.258+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.245 seconds
+[2025-01-06T20:57:14.563+0000] {processor.py:161} INFO - Started process (PID=4030) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:57:14.566+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T20:57:14.569+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:57:14.568+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:57:14.586+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:57:14.777+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:57:14.776+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:57:14.794+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:57:14.794+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T20:57:14.824+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.269 seconds
+[2025-01-06T20:57:45.067+0000] {processor.py:161} INFO - Started process (PID=4042) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:57:45.070+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T20:57:45.073+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:57:45.073+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:57:45.093+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:57:45.273+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:57:45.272+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:57:45.290+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:57:45.290+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T20:57:45.318+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.259 seconds
+[2025-01-06T20:58:16.267+0000] {processor.py:161} INFO - Started process (PID=4054) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:58:16.269+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T20:58:16.273+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:58:16.272+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:58:16.289+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:58:16.460+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:58:16.459+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:58:16.480+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:58:16.480+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T20:58:16.509+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.249 seconds
+[2025-01-06T20:58:46.974+0000] {processor.py:161} INFO - Started process (PID=4066) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:58:46.976+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T20:58:46.978+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:58:46.978+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:58:46.992+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:58:47.164+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:58:47.163+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:58:47.181+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:58:47.181+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T20:58:47.217+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.249 seconds
+[2025-01-06T20:59:17.741+0000] {processor.py:161} INFO - Started process (PID=4077) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:59:17.743+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T20:59:17.746+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:59:17.745+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:59:17.759+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:59:17.936+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:59:17.935+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:59:17.954+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:59:17.954+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T20:59:17.983+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.250 seconds
+[2025-01-06T20:59:48.247+0000] {processor.py:161} INFO - Started process (PID=4082) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:59:48.249+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T20:59:48.252+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:59:48.251+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:59:48.264+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T20:59:48.427+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:59:48.426+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:59:48.447+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:59:48.446+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T20:59:48.475+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.234 seconds
+[2025-01-06T21:00:18.775+0000] {processor.py:161} INFO - Started process (PID=4094) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:00:18.777+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T21:00:18.781+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:00:18.780+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:00:18.798+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:00:19.028+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:00:19.027+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:00:19.053+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:00:19.052+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T21:00:19.096+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.329 seconds
+[2025-01-06T21:00:50.078+0000] {processor.py:161} INFO - Started process (PID=4106) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:00:50.080+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T21:00:50.082+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:00:50.082+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:00:50.096+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:00:50.285+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:00:50.285+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:00:50.303+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:00:50.302+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T21:00:50.348+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.278 seconds
+[2025-01-06T21:01:20.912+0000] {processor.py:161} INFO - Started process (PID=4118) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:01:20.914+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T21:01:20.917+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:01:20.917+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:01:20.932+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:01:21.179+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:01:21.179+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:01:21.205+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:01:21.204+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T21:01:21.235+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.331 seconds
+[2025-01-06T21:01:51.748+0000] {processor.py:161} INFO - Started process (PID=4130) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:01:51.750+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T21:01:51.753+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:01:51.752+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:01:51.771+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:01:51.983+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:01:51.983+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:01:52.005+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:01:52.005+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T21:01:52.051+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.309 seconds
+[2025-01-06T21:02:22.362+0000] {processor.py:161} INFO - Started process (PID=4143) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:02:22.364+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T21:02:22.366+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:02:22.366+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:02:22.380+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:02:22.553+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:02:22.552+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:02:22.569+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:02:22.569+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T21:02:22.596+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.242 seconds
+[2025-01-06T21:02:53.392+0000] {processor.py:161} INFO - Started process (PID=4157) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:02:53.394+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T21:02:53.398+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:02:53.398+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:02:53.415+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:02:53.616+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:02:53.616+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:02:53.637+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:02:53.636+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T21:02:53.673+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.286 seconds
+[2025-01-06T21:03:24.456+0000] {processor.py:161} INFO - Started process (PID=4170) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:03:24.458+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T21:03:24.460+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:03:24.459+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:03:24.477+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:03:24.649+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:03:24.649+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:03:24.670+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:03:24.670+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T21:03:24.703+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.253 seconds
+[2025-01-06T21:03:55.281+0000] {processor.py:161} INFO - Started process (PID=4182) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:03:55.283+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T21:03:55.284+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:03:55.284+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:03:55.300+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:03:55.468+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:03:55.467+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:03:55.484+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:03:55.484+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T21:03:55.509+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.233 seconds
+[2025-01-06T21:04:26.054+0000] {processor.py:161} INFO - Started process (PID=4193) to work on /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:04:26.056+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_3.py for tasks to queue
+[2025-01-06T21:04:26.057+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:04:26.057+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:04:26.071+0000] {processor.py:840} INFO - DAG(s) 'process_csv_workflow' retrieved from /opt/airflow/dags/scraping_3.py
+[2025-01-06T21:04:26.233+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:04:26.233+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:04:26.256+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:04:26.255+0000] {dag.py:3823} INFO - Setting next_dagrun for process_csv_workflow to None, run_after=None
+[2025-01-06T21:04:26.289+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_3.py took 0.241 seconds

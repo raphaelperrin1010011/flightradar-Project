@@ -1,0 +1,147 @@
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from datetime import datetime, timedelta
+import requests
+import json
+import logging
+from celery import Celery
+import redis
+
+# Configure logging to save logs to a file
+logging.basicConfig(filename='/home/debian/dev/fligthradar/flightradar-Project/app.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+redis_client = redis.Redis(host='redis', port=6379, db=0)
+
+def publish_message_to_redis(channel, message):
+    redis_client.publish(channel, message)
+
+def push_to_redis(result, key):
+    """
+    Stocke les données dans Redis après les avoir sérialisées.
+    """
+    try:
+        serialized_data = json.dumps(result)  # Sérialisation en JSON
+        redis_client.set(key, serialized_data)
+        logging.info(f"Résultat stocké dans Redis sous la clé '{key}'.")
+    except Exception as e:
+        logging.error(f"Erreur lors de l'écriture dans Redis : {str(e)}")
+        raise
+
+def test_redis_connection():
+    logging.info("Testing Redis connection...")
+    try:
+        # Test the connection with a ping
+        if redis_client.ping():
+            logging.info("Connected to Redis server successfully.")
+    except redis.ConnectionError:
+        logging.error("Failed to connect to Redis server.")
+
+def publish_to_channel(channel_name, key, value):
+    # Publier des données dans Redis
+    redis_client.set(key, json.dumps(value))  # Assurez-vous que la valeur est sérialisée en JSON
+    # Envoyer un message au channel
+    redis_client.publish(channel_name, key)
+    logging.info(f"Published key '{key}' with value '{value}' to channel '{channel_name}'.")
+
+# Test the Redis connection
+test_redis_connection()
+
+# # Exemple d'utilisation de la fonction publish_to_channel
+# publish_to_channel('dag_notifications', 'year', '2023')
+
+# Définir les paramètres par défaut du DAG
+default_args = {
+    'owner': 'airflow',
+    'depends_on_past': False,
+    'start_date': datetime.today(),  # Date de départ
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+}
+
+# Définir le DAG
+dag = DAG(
+    'scraping_workflow',
+    default_args=default_args,
+    description='DAG pour gérer le workflow utilisateur avec des appels API',
+    schedule_interval=None,
+)
+
+# Fonction pour appeler l'API de filtrage des liens d'année
+def call_filtered_links(year: str, **kwargs):
+    url = f"http://python-data:8100/filtered_links/{year}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        logging.info(f"Requête réussie pour les liens filtrés de l'année {year}.")
+        logging.info(f"Résultat: {response.json()['filtered_links']}")
+        push_to_redis(response.json()['filtered_links'], "year")
+        publish_message_to_redis('dag_notifications', 'year')
+    else:
+        logging.error(f"Échec de la requête pour les liens filtrés de l'année {year}. Code de statut: {response.status_code}")
+        publish_message_to_redis('dag_notifications', 'dag_failed')
+        raise Exception(f"Failed to fetch filtered links for year {year}. Status code: {response.status_code}")
+
+# Fonction pour appeler l'API de filtrage des sous-liens
+def call_filtered_links_2(link_1: str, **kwargs):
+    url = f"http://python-data:8100/filtered_links_2/{link_1}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        logging.info(f"Requête réussie pour les sous-liens de {link_1}.")
+        kwargs['ti'].xcom_push(key='filtered_links_2', value=response.json()['filtered_links_2'])
+    else:
+        logging.error(f"Échec de la requête pour les sous-liens de {link_1}. Code de statut: {response.status_code}")
+        raise Exception(f"Failed to fetch filtered links 2 for link_1 {link_1}. Status code: {response.status_code}")
+
+# Fonction pour appeler l'API de traitement CSV
+def call_process_csv(link_1: str, link_2_list: list, **kwargs):
+    url = f"http://python-data:8100/process_csv/{link_1}"
+    headers = {'Content-Type': 'application/json'}
+    data = json.dumps({'link_2': link_2_list})
+    response = requests.post(url, headers=headers, data=data)
+    if response.status_code == 200:
+        logging.info(f"CSV traité avec succès pour {link_1} et {link_2_list}.")
+    else:
+        logging.error(f"Échec du traitement CSV pour {link_1} et {link_2_list}. Code de statut: {response.status_code}")
+        raise Exception(f"Failed to process CSV for link_1 {link_1} and link_2 {link_2_list}. Status code: {response.status_code}")
+
+# Définir les tâches dans le DAG
+
+# Tâche 1 : Sélection de l'année et récupération des liens filtrés
+def task_select_year(**context):
+    year = context['dag_run'].conf.get('year', '2021')  # Par défaut '2021' si aucune année n'est fournie
+    call_filtered_links(year, **context)
+
+t1 = PythonOperator(
+    task_id='select_year',
+    python_callable=task_select_year,
+    provide_context=True,
+    dag=dag,
+)
+
+# Tâche 2 : Sélection du lien principal (link_1) et récupération des sous-liens (link_2)
+def task_select_link_1(**context):
+    link_1 = context['dag_run'].conf.get('link_1', None)
+    if not link_1:
+        raise Exception("link_1 is required to proceed.")
+    call_filtered_links_2(link_1, **context)
+
+t2 = PythonOperator(
+    task_id='select_link_1',
+    python_callable=task_select_link_1,
+    provide_context=True,
+    dag=dag,
+)
+ 
+# Tâche 3 : Traitement du CSV après sélection des sous-liens
+def task_process_csv(**context):
+    link_1 = context['dag_run'].conf.get('link_1', None)
+    link_2 = context['task_instance'].xcom_pull(task_ids='select_link_1', key='filtered_links_2')
+    if not link_1 or not link_2:
+        raise Exception("Both link_1 and link_2 are required to process CSV.")
+    call_process_csv(link_1, link_2, **context)
+
+t3 = PythonOperator(
+    task_id='process_csv',
+    python_callable=task_process_csv,
+    provide_context=True,
+    dag=dag,
+)

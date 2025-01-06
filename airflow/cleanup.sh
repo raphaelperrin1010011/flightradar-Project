@@ -8,6 +8,7 @@ docker volume prune -f
 echo "[airflow] Suppression des réseaux Docker non utilisés..."
 docker network prune -f
 
-rm -rf logs/* plugins/* dags/__pycache__
+echo "[airflow] Suppression du contenu de la bdd PostgreSQL et du reste..."
+rm -rf postgres-data/* logs/* plugins/* dags/__pycache__
 
 echo "[airflow] Les services Docker Compose et les ressources associées ont été supprimés avec succès."

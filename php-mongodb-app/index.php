@@ -17,6 +17,9 @@
                 <br>
                 <div class="container-datasets">
                     <div class="datasets" id="datasets">
+                        <button class="year" id="?year=2017">2017</button>
+                        <button class="year" id="?year=2018">2018</button>
+                        <button class="year" id="?year=2019">2019</button>
                         <button class="year" id="?year=2020">2020</button>
                         <button class="year" id="?year=2021">2021</button>
                         <button class="year" id="?year=2022">2022</button>
@@ -45,7 +48,11 @@
                     </button>
                 </div>
             </div>
-            <div id="videoplayer" style="display: none;">
+            <div id="videoplayer" style="display: none">
+                <video id="video" controls>
+                    <source src="shared/europe_timelapse.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             <div id="regionModal" class="modal">
                 <div class="modal-content">

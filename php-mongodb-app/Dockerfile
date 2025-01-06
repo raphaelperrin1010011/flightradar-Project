@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y \
 # Installer l'extension MongoDB
 RUN pecl install mongodb && docker-php-ext-enable mongodb
 
+# Installer l'extension Redis
+RUN pecl install redis && docker-php-ext-enable redis
 
 # Installer Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -22,7 +24,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copier les fichiers de l'application dans le conteneur
 COPY . /var/www/html/
 
-#lancer l'install de composer
+# Lancer l'installation de Composer
 RUN composer install
 
 # Copier la configuration Apache personnalisée

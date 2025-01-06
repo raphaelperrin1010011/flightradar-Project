@@ -25,7 +25,7 @@ while ! docker network ls | grep -q "airflow_app-network"; do
     sleep 2
 done
 
-docker compose up 
+docker compose up --build
 
 echo "Les services Docker Compose ont été démarrés avec succès."
 

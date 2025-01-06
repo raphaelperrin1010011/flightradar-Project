@@ -2,14 +2,13 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import selenium.common.exceptions
 import time
-import os
+import logging
 
 app = FastAPI()
 
@@ -22,17 +21,24 @@ app.add_middleware(
     allow_headers=["*"],  # Permettre tous les headers
 )
 
+# Configurer le logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 class ICAORequest(BaseModel):
     icao: str
 
 class FlightRadarScraper:
-    def __init__(self, driver_path: str):
+    def __init__(self):
         chrome_options = Options()
-        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--headless")  # Mode sans tête
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
-        
-        self.driver = webdriver.Chrome(service=Service(driver_path), options=chrome_options)
+
+        # Configuration du WebDriver pour utiliser le serveur Selenium
+        self.driver = webdriver.Remote(
+            command_executor='http://selenium-chrome:4444/wd/hub',
+            options=chrome_options
+        )
         self.url = 'https://www.flightradar24.com/data'
         self.driver.get(self.url)
         self.reject_cookies()
@@ -44,11 +50,11 @@ class FlightRadarScraper:
             self.driver.execute_script("arguments[0].click();", cookies)
             time.sleep(1)
         except selenium.common.exceptions.NoSuchElementException as e:
-            print(f'Erreur: Element non trouvé {e}')
+            logging.error(f'Erreur: Element non trouvé {e}')
         except selenium.common.exceptions.ElementClickInterceptedException as e:
-            print(f'Erreur: Element click intercepté {e}')
+            logging.error(f'Erreur: Element click intercepté {e}')
         except Exception as e:
-            print(f'Erreur: {e}')
+            logging.error(f'Erreur: {e}')
 
     def search_aircraft(self, icao: str) -> str:
         try:
@@ -77,13 +83,14 @@ class FlightRadarScraper:
             time.sleep(1)
             return img.get_attribute('src')
         except (selenium.common.exceptions.NoSuchElementException, selenium.common.exceptions.ElementClickInterceptedException) as e:
-            print(f'Erreur: {e}')
+            logging.error(f'Erreur: {e}')
         except Exception as e:
-            print(f'Erreur: {e}')
+            logging.error(f'Erreur: {e}')
             raise
 
     def close(self):
-        self.driver.quit()
+        if hasattr(self, 'driver'):
+            self.driver.quit()
 
     def __del__(self):
         self.close()
@@ -91,13 +98,14 @@ class FlightRadarScraper:
 @app.post("/get-aircraft-image/")
 def get_aircraft_image_endpoint(request: ICAORequest):
     try:
-        scraper = FlightRadarScraper(driver_path='/usr/local/bin/chromedriver')
+        scraper = FlightRadarScraper()
         img_src = scraper.search_aircraft(request.icao)
         scraper.close()
         if img_src is None:
             raise HTTPException(status_code=404, detail="Image not found")
         return {"image_url": img_src}
     except Exception as e:
+        logging.error(f'Erreur: {e}')
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":

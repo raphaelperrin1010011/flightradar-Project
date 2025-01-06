@@ -1,0 +1,112 @@
+[2025-01-06T20:56:42.991+0000] {processor.py:161} INFO - Started process (PID=4016) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:56:42.992+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T20:56:42.995+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:56:42.994+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:56:43.045+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:56:43.210+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:56:43.210+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:56:43.230+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:56:43.230+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T20:56:43.262+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.279 seconds
+[2025-01-06T20:57:13.511+0000] {processor.py:161} INFO - Started process (PID=4028) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:57:13.514+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T20:57:13.521+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:57:13.520+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:57:13.570+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:57:13.793+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:57:13.792+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:57:13.815+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:57:13.815+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T20:57:13.861+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.356 seconds
+[2025-01-06T20:57:44.031+0000] {processor.py:161} INFO - Started process (PID=4040) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:57:44.033+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T20:57:44.036+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:57:44.036+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:57:44.089+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:57:44.258+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:57:44.257+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:57:44.277+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:57:44.276+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T20:57:44.512+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.487 seconds
+[2025-01-06T20:58:14.764+0000] {processor.py:161} INFO - Started process (PID=4052) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:58:14.766+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T20:58:14.769+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:58:14.768+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:58:14.813+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:58:14.976+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:58:14.976+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:58:15.201+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:58:15.200+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T20:58:15.223+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.467 seconds
+[2025-01-06T20:58:45.729+0000] {processor.py:161} INFO - Started process (PID=4064) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:58:45.730+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T20:58:45.733+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:58:45.733+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:58:45.777+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:58:45.982+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:58:45.981+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:58:45.997+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:58:45.997+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T20:58:46.031+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.308 seconds
+[2025-01-06T20:59:16.423+0000] {processor.py:161} INFO - Started process (PID=4068) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:59:16.425+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T20:59:16.428+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:59:16.428+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:59:16.477+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:59:16.646+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:59:16.645+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:59:16.663+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:59:16.662+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T20:59:16.699+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.282 seconds
+[2025-01-06T20:59:47.201+0000] {processor.py:161} INFO - Started process (PID=4080) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:59:47.202+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T20:59:47.205+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:59:47.204+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:59:47.257+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T20:59:47.437+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:59:47.436+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T20:59:47.458+0000] {logging_mixin.py:188} INFO - [2025-01-06T20:59:47.458+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T20:59:47.493+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.299 seconds
+[2025-01-06T21:00:17.693+0000] {processor.py:161} INFO - Started process (PID=4092) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:00:17.695+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T21:00:17.698+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:00:17.698+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:00:17.770+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:00:18.024+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:00:18.024+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:00:18.050+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:00:18.049+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T21:00:18.326+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.643 seconds
+[2025-01-06T21:00:48.538+0000] {processor.py:161} INFO - Started process (PID=4104) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:00:48.540+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T21:00:48.544+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:00:48.544+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:00:48.603+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:00:48.814+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:00:48.813+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:00:49.034+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:00:49.034+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T21:00:49.061+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.529 seconds
+[2025-01-06T21:01:19.549+0000] {processor.py:161} INFO - Started process (PID=4116) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:01:19.552+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T21:01:19.556+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:01:19.555+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:01:19.623+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:01:19.826+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:01:19.826+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:01:19.848+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:01:19.847+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T21:01:19.889+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.345 seconds
+[2025-01-06T21:01:50.425+0000] {processor.py:161} INFO - Started process (PID=4128) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:01:50.427+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T21:01:50.430+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:01:50.429+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:01:50.481+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:01:50.654+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:01:50.653+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:01:50.672+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:01:50.672+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T21:01:50.708+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.288 seconds
+[2025-01-06T21:02:21.312+0000] {processor.py:161} INFO - Started process (PID=4141) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:02:21.314+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T21:02:21.316+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:02:21.316+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:02:21.362+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:02:21.537+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:02:21.537+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:02:21.554+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:02:21.553+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T21:02:21.581+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.276 seconds
+[2025-01-06T21:02:51.886+0000] {processor.py:161} INFO - Started process (PID=4155) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:02:51.888+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T21:02:51.893+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:02:51.892+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:02:51.938+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:02:52.105+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:02:52.104+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:02:52.127+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:02:52.126+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T21:02:52.346+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.465 seconds
+[2025-01-06T21:03:22.916+0000] {processor.py:161} INFO - Started process (PID=4168) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:03:22.918+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T21:03:22.919+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:03:22.919+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:03:22.969+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:03:23.183+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:03:23.183+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:03:23.413+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:03:23.412+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T21:03:23.446+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.536 seconds
+[2025-01-06T21:03:53.938+0000] {processor.py:161} INFO - Started process (PID=4180) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:03:53.941+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T21:03:53.943+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:03:53.942+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:03:54.003+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:03:54.194+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:03:54.193+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:03:54.212+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:03:54.211+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T21:03:54.242+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.311 seconds
+[2025-01-06T21:04:24.746+0000] {processor.py:161} INFO - Started process (PID=4184) to work on /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:04:24.748+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/api-timelapse.py for tasks to queue
+[2025-01-06T21:04:24.749+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:04:24.749+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:04:24.797+0000] {processor.py:840} INFO - DAG(s) 'python-timelapse-workflow' retrieved from /opt/airflow/dags/api-timelapse.py
+[2025-01-06T21:04:24.970+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:04:24.970+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-06T21:04:24.987+0000] {logging_mixin.py:188} INFO - [2025-01-06T21:04:24.986+0000] {dag.py:3823} INFO - Setting next_dagrun for python-timelapse-workflow to None, run_after=None
+[2025-01-06T21:04:25.013+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/api-timelapse.py took 0.274 seconds

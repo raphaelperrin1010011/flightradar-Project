@@ -1,7 +1,7 @@
 fastapi
 uvicorn
 pillow
-numpy
+numpy==1.21.0
 pandas
 matplotlib
 seaborn
@@ -11,3 +11,7 @@ pyproj
 pymongo
 pytz
 tzlocal
+aiofiles
+rasterio==1.2.10
+scipy
+psutil

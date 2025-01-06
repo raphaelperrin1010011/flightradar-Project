@@ -1,17 +1,18 @@
-from io import BytesIO
-from bs4 import BeautifulSoup
-import gzip
-import requests
-import tarfile
-import csv
+from playwright.async_api import async_playwright
+import asyncio
 import time
+import re
+import requests
+import csv
+import gzip
+import tarfile
+from io import BytesIO
 import logging
 from pymongo import MongoClient
 from typing import List
 from fastapi import FastAPI, HTTPException
 import uvicorn
 from pydantic import BaseModel
-from typing import List
 
 class LinkData(BaseModel):
     link_2: List[str]
@@ -27,6 +28,8 @@ app = FastAPI()
 
 def update_progress(progress):
     progress_collection.update_one({}, {"$set": {"progress": progress}}, upsert=True)
+
+dates_save = None
 
 def convert_types(row):
     # Conversion des types pour chaque champ
@@ -48,41 +51,68 @@ def convert_types(row):
     row['lastcontact'] = float(row['lastcontact']) if row['lastcontact'] else None
     return row
 
+async def get_all_links():
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True)
+        page = await browser.new_page()
+        await page.goto("https://opensky-network.org/datasets/#states/")
+        await asyncio.sleep(0.1)
+
+        all_hrefs = []
+
+        while True:
+            links = await page.query_selector_all('a.button.is-text.is-rounded')
+            hrefs = [await link.get_attribute('href') for link in links]
+            all_hrefs.extend(hrefs)
+            print(all_hrefs)
+            next_button = await page.query_selector('button.button.is-primary.is-rounded:has(i.fas.fa-angle-right)')
+            if next_button:
+                try:
+                    if await next_button.is_visible() and await next_button.is_enabled():
+                        await next_button.click(timeout=60000)
+                        await asyncio.sleep(0.1)
+                    else:
+                        logging.info("Le bouton 'Suivant' n'est pas visible ou activé. fin du scraping.")
+                        break
+                except TimeoutError:
+                    logging.error("Le bouton 'Suivant' n'est pas cliquable après 60 secondes. fin du scraping.")
+                    break
+            else:
+                break
+
+        await browser.close()
+        return all_hrefs
+
+@app.on_event("startup")
+async def startup_event():
+    global links
+    links = await get_all_links()
+
 @app.get("/filtered_links/{year}")
 def get_filtered_links(year: str):
-    response = requests.get("https://opensky-network.org/datasets/states")
-    time.sleep(1)
-    soup = BeautifulSoup(response.text, "html.parser")
-    links = soup.find_all("a")
-    filtered_links = [link.get("href")[2:] for i, link in enumerate(links) if i % 4 == 0 and link.get("href")[2:].startswith(year)]
-    return {"filtered_links": filtered_links}
+    global links
+    dates = [link for link in links if re.search(year, link)]
+    return {"filtered_links": dates}
 
-@app.get("/filtered_links_2/{link_1}")
-def get_filtered_links_2(link_1: str):
-    response = requests.get(f"https://opensky-network.org/datasets/states/{link_1}")
-    time.sleep(1)
-    soup = BeautifulSoup(response.text, "html.parser")
-    links = soup.find_all("a")
-    filtered_links_2 = [link.get("href")[2:] for i, link in enumerate(links) if i % 4 == 0][1:]
-    return {"filtered_links_2": filtered_links_2}
+@app.get("/filtered_links_2/{cible}")
+async def get_filtered_links_2(cible: str):
+   return {"filtered_links_2": [f"{str(i).zfill(2)}" for i in range(24)]}
 
-@app.post("/process_csv/{link_1}")
-def process_csv(link_1: str, link_data: LinkData):
-    total_steps = len(link_data.link_2) * 3  # Nombre total d'étapes
-    current_step = 0
+@app.post("/process_csv/{cible}")
+def download_parts(cible: str, parts_cible: LinkData):
     update_progress(0.1)
-    for link in link_data.link_2:
-        try:
-            response = requests.get(f"https://opensky-network.org/datasets/states/{link_1}/{link}")
+    total_steps = len(parts_cible.link_2) * 3
+    current_step = 0
+    if cible[0] == ".":
+        date_parsed = cible[1:]
+    else:
+        date_parsed = cible
+    for part in parts_cible.link_2:
+        dl_link = f"https://s3.opensky-network.org/data-samples/states/{cible}/{part}/states_{date_parsed}-{part}.csv.tar"
+        logging.info(f"Téléchargement de\n{dl_link}\n")
+        response = requests.get(dl_link)
+        if response.status_code == 200:
             response.raise_for_status()
-            time.sleep(1)
-            soup = BeautifulSoup(response.text, "html.parser")
-            links = soup.find_all("a")
-            link_3 = [link.get("href")[2:] for i, link in enumerate(links) if i % 4 == 0][2:-1][0]
-            time.sleep(1)
-            response = requests.get(f"https://opensky-network.org/datasets/states/{link_1}/{link}/{link_3}")
-            response.raise_for_status()
-            time.sleep(1)
             tar_content = BytesIO(response.content)
             with tarfile.open(fileobj=tar_content, mode="r:*") as tar:
                 for member in tar.getmembers():
@@ -98,17 +128,11 @@ def process_csv(link_1: str, link_data: LinkData):
                                         rows.append(converted_row)
                                 collection.insert_many(rows)
                                 logging.info(f"Inséré {len(rows)} lignes dans la base de données")
-            current_step += 3
-            update_progress(int((current_step / total_steps) * 100))
-        except requests.exceptions.RequestException as e:
-            logging.error(f"Erreur de requête: {e}")
-            raise HTTPException(status_code=500, detail=f"Erreur de requête: {e}")
-        except tarfile.ReadError as e:
-            logging.error(f"Erreur de lecture du fichier tar: {e}")
-            raise HTTPException(status_code=500, detail=f"Erreur de lecture du fichier tar: {e}")
-        except Exception as e:
-            logging.error(f"Erreur inattendue: {e}")
-            raise HTTPException(status_code=500, detail=f"Erreur inattendue: {e}")
+                            current_step += 3
+                            update_progress(int((current_step / total_steps) * 100))
+        else:
+            logging.error(f"Erreur lors du téléchargement de {dl_link}: {response.status_code}\n\n====================================================================================================================================\n")
+            return {"status": "failed", "message": "can't find the date in the list"}
     return {"status": "success", "message": "CSV processed and data inserted into the database"}
 
 if __name__ == "__main__":

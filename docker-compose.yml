@@ -20,6 +20,8 @@ services:
     container_name: python-timelapse
     depends_on:
       - mongodb
+    volumes:
+      - shared_volume:/app/shared
     networks:
       - airflow_app-network
   
@@ -30,17 +32,29 @@ services:
       - mongodb
     networks:
       - airflow_app-network
+    volumes:
+      - shared_volume:/var/www/html/shared
     ports:
       - "85:85"
 
+  selenium-chrome:
+    image: selenium/standalone-chrome:131.0-chromedriver-131.0
+    container_name: selenium-chrome
+    networks:
+      - airflow_app-network
+  
   python-image-api:
     build: ./container-image-api
     container_name: python-image-api
     depends_on:
       - mongodb
+      - selenium-chrome
     networks:
       - airflow_app-network
-
+  
 networks:
   airflow_app-network:
     external: true
+
+volumes:
+  shared_volume:

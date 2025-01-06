@@ -1,93 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Density Map Stream</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
+<?php
+
+
+$airflow_url = 'http://airflow-webserver:8080/api/v1';
+$username = 'airflow';
+$password = 'airflow';
+
+// $redis = new Redis();
+// $redis->connect('redis', 6379); // Connectez-vous à Redis (vérifiez le nom du service et le port)
+
+function call_airflow_api($endpoint, $method = 'GET', $data = null) {
+    global $username, $password, $airflow_url;
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $airflow_url . $endpoint);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_USERPWD, "$username:$password");
+    curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+    if ($method === 'POST') {
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        if ($data) {
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         }
-        #canvasElement {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: 1000;
-            background-color: black;
+    }
+
+    $response = curl_exec($ch);
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($http_code !== 200 && $http_code !== 201) {
+        echo "Erreur: Impossible d'accéder à l'API Airflow (Code: $http_code). Endpoint: $endpoint";
+        return false;
+    }
+
+    return json_decode($response, true);
+}
+
+if (isset($_GET['region'])) {
+
+    $region = addslashes($_GET['region']);
+    $shared_folder = 'shared';
+    $video_filename = $region."_timelapse.mp4";
+    $shared_video_path = $shared_folder . '/' . $video_filename;
+    
+    if (file_exists($shared_video_path)) {
+        echo("<video id='video' controls><source src='shared/".$region."_timelapse.mp4' type='video/mp4'>Your browser does not support the video tag.</video>");
+        die();
+    }
+
+    // Lancer l'écoute Redis en arrière-plan
+    $redisListener = proc_open('php redis_listener.php', [
+        1 => ['pipe', 'w'], // Rediriger stdout
+        2 => ['pipe', 'w'], // Rediriger stderr
+    ], $pipes);
+    
+    if (!is_resource($redisListener)) {
+        die("Impossible de démarrer le processus Redis listener.<br><br>");
+    }
+    
+    // Appeler l'API Airflow
+    $response = call_airflow_api('/dags/python-timelapse-workflow/dagRuns', 'POST', [
+        'conf' => ['region' => $region]
+    ]);
+    
+    // Lire les sorties de Redis listener en temps réel
+    $outputBuffer = '';
+    while ($status = proc_get_status($redisListener)) {
+        if (!$status['running']) {
+            break;
         }
-    </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-    <canvas id="canvasElement"></canvas>
-    <?php
-    // Récupérer le paramètre 'region' de l'URL
-    $region = isset($_GET['region']) ? $_GET['region'] : 'world';
-    // Envoyer au JS
-    echo "<script>const region = '$region';</script>";
-    ?>
-    <script>
-        const canvas = document.getElementById('canvasElement');
-        const ctx = canvas.getContext('2d');
-        console.log(region);
-
-        // URL de base pour récupérer les timestamps et les images
-        const baseUrl = 'stream_video.php';
-
-        // Fonction pour récupérer les timestamps
-        function fetchTimestamps() {
-            $.get(`${baseUrl}`, { region: region }, function(data) {
-                const timestamps = data;
-                displayImagesSequentially(timestamps);
-            });
+    
+        // Lire stdout et afficher dans le processus principal
+        while ($output = fgets($pipes[1])) {
+            $outputBuffer .= $output;
         }
-
-        // Fonction pour afficher les images en séquence
-        function displayImagesSequentially(timestamps) {
-            let index = 0;
-            let skipFirstImage = 1;
-
-            function displayNextImage() {
-                if (index < timestamps.length) {
-                    const timestamp = timestamps[index];
-                    const imageUrl = `${baseUrl}?region=${region}&time=${timestamp}`;
-                    const img = new Image();
-                    img.onload = function() {
-                        if (skipFirstImage) {
-                            skipFirstImage = false; // Ignorer la première image
-                            index++;
-                            displayNextImage();
-                        } else {
-                            canvas.width = 1920;
-                            canvas.height = 1080;
-                            ctx.drawImage(img, 0, 0);
-                            console.log('Image affichée pour timestamp:', timestamp);
-                            index++;
-                            setTimeout(displayNextImage, 1000); // Délai de 1 seconde entre chaque image
-                        }
-                    }
-                    img.onerror = function() {
-                        console.log('Erreur de chargement de l\'image pour timestamp:', timestamp);
-                        index++;
-                        displayNextImage(); // Passer à l'image suivante en cas d'erreur
-                    }
-                    img.src = imageUrl;
-                    console.log('Chargement de l\'image:', img.src);
-                }
-            }
-
-            displayNextImage();
+    
+        // Lire stderr (en cas d'erreurs)
+        while ($error = fgets($pipes[2])) {
+            echo nl2br("Erreur Redis Listener : $error"); // Utiliser nl2br pour conserver les sauts de ligne
         }
+    
+        usleep(30000); // Petite pause pour éviter de surcharger la boucle
+    }
 
-        fetchTimestamps();
-    </script>
-</body>
-</html>
+    fclose($pipes[1]);
+    fclose($pipes[2]);
+    proc_close($redisListener);
+
+    if ($outputBuffer === "dag_failed") {
+        echo("Error: timelapse api failed.<br><br>");
+        die();
+    } else {
+        echo("<video id='video' controls><source src='shared/".$region."_timelapse.mp4' type='video/mp4'>Your browser does not support the video tag.</video>");
+        die();
+    }
+    //A  REVOIR ICIIII
+}
+?>

@@ -1,7 +1,67 @@
 click = 0;
+var region_global = null;
+i = 0;
 
-function updateProgressBar() {
-    fetch('progress.php')
+let stopChecking = false;
+
+async function checkVideo(region) {
+    while (!stopChecking) {
+        console.log('En attente de la vidéo...');
+        await $.get('stream.php?region=' + region, function(response, status, xhr) {
+            console.log(status);
+            console.log(response);
+            if (status === "success") {
+                jQuery('#videoplayer').empty().html(response);
+                video = document.getElementById('video');
+                video.addEventListener('canplaythrough', function() {
+                    stopChecking = true;
+                    console.log('La vidéo est prête à être visionnée.');
+                });
+            }
+        });
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Attendre 100 ms
+    }
+}
+
+function updateProgressBar(region = region_global) {
+    if (region){
+        fetch(`process_vid.php?region=${region}`)
+        .then(response => response.json())
+        .then(data => {
+            const progressBarInner = document.getElementById('progressBarInner');
+            progressBarInner.style.width = data.progress + '%';
+            progressBarInner.textContent = Math.round(data.progress) + '%';
+            if (data.progress >= 100) {
+                progressBarInner.style.width = '100%';
+                progressBarInner.textContent = '100%';
+                jQuery('#progressBar').hide();
+                jQuery('#progress-bar-text').hide();
+                video = document.getElementById('video');
+                canPlayThroughTriggered = false;
+                video.addEventListener('canplaythrough', function() {
+                    canPlayThroughTriggered = true;
+                    console.log('La vidéo est prête à être visionnée.');
+                });
+                if (!canPlayThroughTriggered) {
+                    checkVideo(region);
+                }
+                jQuery('#videoplayer').show('slow');
+                console.log(`Chargement de la vidéo pour la région: ${region}`);
+                modal.style.display = 'none';
+                region_global = null;
+                i = 0;
+            } else {
+                if (i == 0){
+                    jQuery('#progressBar').show('slow');
+                    jQuery('#progress-bar-text').text(`Processing video of ${region_global}`).show('slow');
+                    i = 1;
+                }
+                setTimeout(updateProgressBar, 100);
+            }
+        })
+        .catch(error => console.error('Error fetching progress:', error));
+    } else {
+        fetch('progress.php')
         .then(response => response.json())
         .then(data => {
             const progressBarInner = document.getElementById('progressBarInner');
@@ -18,38 +78,76 @@ function updateProgressBar() {
             }
         })
         .catch(error => console.error('Error fetching progress:', error));
+    }
 }
 
-function check() {
-    fetch('progress.php')
+function check(region) {
+    if (region){
+        console.log(region);
+        fetch(`process_vid.php?region=${region}`)
         .then(response => response.json())
         .then(data => {
-            if (data.progress < 100 && data.progress > 0) {
+            if (data.progress < 100 && data.progress >= 0) {
+                jQuery('#ready').hide();
                 jQuery('#progressBar').show('slow');
-                jQuery('#progress-bar-text').show('slow');
+                jQuery('#progress-bar-text').text(`Processing video of ${region}`).show('slow');
                 updateProgressBar();
-            }
-            else if (data.progress >= 100) {
-                jQuery('#ready').show();
             } else {
-                jQuery('#welcome').show();
+                region_global = null;
+                jQuery('#progressBar').hide();
+                jQuery('#progress-bar-text').hide();
+                jQuery('#ready').show();
             }
         })
+    } else {
+        fetch('progress.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.progress < 100 && data.progress > 0) {
+                    jQuery('#progressBar').show('slow');
+                    jQuery('#progress-bar-text').show('slow');
+                    updateProgressBar();
+                } else if (data.progress >= 100) {
+                    jQuery('#ready').show();
+                    
+                } else {
+                    jQuery('#welcome').show();
+                }
+            })
+    }
 }
 
-//Boutons scraping
+function fetch_region() {
+    return fetch(`process_vid.php`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.region) {
+            return data.region;
+        } else {
+            return null;
+        }
+    });
+}
 
 $(document).ready(function() {
-    check();
+    fetch_region().then(region => {
+        console.log(region);
+        region_global = region;
+        check(region);
+    });
 
     $(document).on('click', '.year', function() {
-        var route = $(this).attr('id');
-
-        jQuery('#datasets').load('scraping.php' + route);
+        console.log('click');
+        $('.year').hide();
         $(document).off('click', '.year');
+        
+        var route = $(this).attr('id');
+        
+        jQuery('#datasets').load('scraping.php' + route);
     });
     
     $(document).on('click', '.date', function() {
+        $(document).off('click', '.date');
         var route = $(this).attr('id');
 
         url = 'scraping.php' + route;
@@ -64,10 +162,10 @@ $(document).ready(function() {
                 console.error("Erreur lors du chargement du contenu : " + xhr.status + " " + xhr.statusText);
             }
         });
-        $(document).off('click', '.date');
     });
     
     $(document).on('click', '.start', function() {
+        $(document).off('click', '.start');
         var route = $(this).attr('id');
         var checked = [];
         
@@ -79,7 +177,6 @@ $(document).ready(function() {
         
         jQuery('#start-container').hide();
         jQuery('#datasets').load('scraping.php' + route);
-        $(document).off('click', '.start');
         jQuery('#welcome').hide()
         jQuery('#progressBar').show('slow');
         jQuery('#progress-bar-text').show('slow');
@@ -97,6 +194,9 @@ $(document).ready(function() {
         // Trier les IDs pour vérifier la séquence
         checked.sort((a, b) => a - b);
 
+        // Vérifier si les IDs sont consécutifs à refaire
+        // Vérifier si les IDs sont consécutifs
+        // Vérifier si les IDs sont consécutifs
         // Vérifier si les IDs sont consécutifs
         for (let i = 1; i < checked.length; i++) {
             if (checked[i] !== checked[i - 1] + 1) {
@@ -105,7 +205,7 @@ $(document).ready(function() {
                 return;
             }
         }
-    });
+    }); 
 });
 
 let map = L.map('map', {
@@ -178,11 +278,31 @@ window.addEventListener('click', (event) => {
     }
 });
 
+function updateProgress(region) {
+    fetch(`set_0.php?region=${region}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log(data.message);
+            } else {
+                console.error(data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
 function loadVideo(region) {
-    jQuery('#ready').hide('slow');
-    jQuery('#videoplayer').show('slow');
-    jQuery('#videoplayer').load(`stream.php?region=${region}`);
-    console.log(`Chargement de la vidéo pour la région: ${region}`);
+    region_global = region;
+    updateProgress(region);
+    jQuery('#ready').hide();
+    $.get('stream.php?region=' + region, function(response, status, xhr) {
+        console.log(status);
+        if (status === "success") {
+            jQuery('#videoplayer').empty().html(response);
+        }
+    });
+    updateProgressBar();
+    console.log(`Chargement de la vidéo pour la région: ${region_global}`);
     modal.style.display = 'none';
 }
 

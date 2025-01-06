@@ -7,8 +7,8 @@ x-airflow-common: &airflow-common
     AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
     AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
     AIRFLOW__CORE__FERNET_KEY: ""
-    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
-    AIRFLOW__CORE__LOAD_EXAMPLES: "true"
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "false"
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
     AIRFLOW__API__AUTH_BACKEND: "airflow.api.auth.backend.basic_auth"
     AIRFLOW__SMTP__SMTP_HOST: "smtp.gmail.com"
     AIRFLOW__SMTP__SMTP_PORT: 587
@@ -36,10 +36,10 @@ services:
       POSTGRES_PASSWORD: airflow
       POSTGRES_DB: airflow
     volumes:
-      - postgres-db-volume:/var/lib/postgresql/data
+      - ./postgres-data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "airflow"]
-      interval: 5s
+      interval: 30s
       retries: 5
     restart: always
     networks:
@@ -47,13 +47,13 @@ services:
 
   redis:
     image: redis:latest
-    ports:
+    ports: 
       - 6380:6379
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
       timeout: 30s
-      retries: 50
+      retries: 5
     restart: always
     networks:
     - app-network
@@ -63,9 +63,11 @@ services:
     command: webserver
     ports:
       - 8080:8080
+    volumes:
+      - ./airflow.cfg:/opt/airflow/airflow.cfg
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
-      interval: 10s
+      interval: 30s
       timeout: 10s
       retries: 5
     restart: always
@@ -81,7 +83,7 @@ services:
           "CMD-SHELL",
           'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"',
         ]
-      interval: 10s
+      interval: 30s
       timeout: 10s
       retries: 5
     restart: always
@@ -95,7 +97,7 @@ services:
       test:
         - "CMD-SHELL"
         - 'celery --app airflow.executors.celery_executor.app inspect ping -d "celery@$${HOSTNAME}"'
-      interval: 10s
+      interval: 30s
       timeout: 10s
       retries: 5
     restart: always
