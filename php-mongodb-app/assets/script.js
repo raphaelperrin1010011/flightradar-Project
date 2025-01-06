@@ -262,7 +262,6 @@ const closeModal = document.getElementsByClassName('close')[0];
 const asiaButton = document.getElementById('asiaButton');
 const europeButton = document.getElementById('europeButton');
 const usaButton = document.getElementById('usaButton');
-const worldButton = document.getElementById('worldButton');
 
 streamButton.addEventListener('click', () => {
     modal.style.display = 'block';
@@ -309,7 +308,6 @@ function loadVideo(region) {
 asiaButton.addEventListener('click', () => loadVideo('asia'));
 europeButton.addEventListener('click', () => loadVideo('europe'));
 usaButton.addEventListener('click', () => loadVideo('usa'));
-worldButton.addEventListener('click', () => loadVideo('world'));
 
 playButton.addEventListener('click', () => {
     let clickEnabled = true; // Variable pour suivre l'état de clic

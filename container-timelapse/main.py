@@ -56,8 +56,6 @@ def get_batch_data(region, timestamp, skip=0, limit=10000):
         query.update({"lon": {"$gte": -130, "$lte": -60}, "lat": {"$gte": 25, "$lte": 50}})
     elif region == "asia":
         query.update({"lon": {"$gte": 60, "$lte": 150}, "lat": {"$gte": 0, "$lte": 60}})
-    elif region == "world":
-        query.update({"lon": {"$gte": -180, "$lte": 180}, "lat": {"$gte": -90, "$lte": 90}})
     
     flights = collection.find(query).skip(skip).limit(limit)
     df = pd.DataFrame(list(flights))
@@ -74,8 +72,6 @@ def get_unique_timestamps(region):
         query.update({"lon": {"$gte": -130, "$lte": -60}, "lat": {"$gte": 25, "$lte": 50}})
     elif region == "asia":
         query.update({"lon": {"$gte": 60, "$lte": 150}, "lat": {"$gte": 0, "$lte": 60}})
-    elif region == "world":
-        query.update({"lon": {"$gte": -180, "$lte": 180}, "lat": {"$gte": -90, "$lte": 90}})
     
     timestamps = collection.distinct("time", query)
     end_time = time.time()
@@ -95,9 +91,6 @@ def create_density_map(region, df, title, timestamp, image_path):
     elif region == "asia":
         figsize = (12, 8)
         fixed_size = (1200, 800)
-    else:  # world
-        figsize = (16, 8)
-        fixed_size = (1600, 800)
     
     fig, ax = plt.subplots(figsize=figsize, subplot_kw={'projection': ccrs.Mercator()})
     logging.info(f"create_density_map: plt.subplots took {time.time() - start_time:.2f} seconds")
@@ -105,8 +98,7 @@ def create_density_map(region, df, title, timestamp, image_path):
     regions = {
         "europe": {"lon": (-20, 40), "lat": (30, 75)},
         "usa": {"lon": (-140, -50), "lat": (20, 55)},
-        "asia": {"lon": (50, 160), "lat": (-10, 70)},
-        "world": {"lon": (-180, 180), "lat": (-90, 90)}
+        "asia": {"lon": (50, 160), "lat": (-10, 70)}
     }
 
     lon_min, lon_max = regions[region]["lon"]

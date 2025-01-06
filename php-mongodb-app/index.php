@@ -61,7 +61,6 @@
                     <button id="asiaButton">Asia</button>
                     <button id="europeButton">Europe</button>
                     <button id="usaButton">USA</button>
-                    <button id="worldButton">Whole World</button>
                 </div>
             </div>
         </div>
