@@ -241,23 +241,23 @@ def create_video_with_ffmpeg(region):
         logging.error(f"Video file not found: {video_path}")
         return None
 
-# @app.on_event("startup")
-# async def on_startup():
-#     logging.info("Application started")
-#     shared_folder = "/app/shared" 
+@app.on_event("startup")
+async def on_startup():
+    logging.info("Application started")
+    shared_folder = "/app/shared" 
     
-#     # Supprimer le contenu du dossier shared
-#     for filename in os.listdir(shared_folder):
-#         file_path = os.path.join(shared_folder, filename)
-#         try:
-#             if os.path.isfile(file_path) or os.path.islink(file_path):
-#                 os.unlink(file_path)
-#             elif os.path.isdir(file_path):
-#                 shutil.rmtree(file_path)
-#         except Exception as e:
-#             logging.error(f"Failed to delete {file_path}. Reason: {e}")
+    # Supprimer le contenu du dossier shared
+    for filename in os.listdir(shared_folder):
+        file_path = os.path.join(shared_folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            logging.error(f"Failed to delete {file_path}. Reason: {e}")
 
-#     logging.info(f"Cleared contents of {shared_folder}")
+    logging.info(f"Cleared contents of {shared_folder}")
 
 @app.get("/generate_video")
 async def generate_video(region: str, request: Request):
