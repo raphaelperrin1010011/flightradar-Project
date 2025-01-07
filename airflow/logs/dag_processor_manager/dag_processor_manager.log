@@ -1,0 +1,49 @@
+[2025-01-07T21:59:21.261+0000] {manager.py:469} INFO - Processing files using up to 2 processes at a time 
+[2025-01-07T21:59:21.262+0000] {manager.py:470} INFO - Process each file at most once every 30 seconds
+[2025-01-07T21:59:21.262+0000] {manager.py:471} INFO - Checking for new files in /opt/airflow/dags every 300 seconds
+[2025-01-07T21:59:21.263+0000] {manager.py:738} INFO - Searching for files in /opt/airflow/dags
+[2025-01-07T21:59:21.267+0000] {manager.py:741} INFO - There are 4 files in /opt/airflow/dags
+[2025-01-07T21:59:21.485+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                             PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+----------------------------------  -----  ---------  --------  ----------  --------------  ----------
+/opt/airflow/dags/api-timelapse.py     61  0.14s             0           0
+/opt/airflow/dags/scraping_1.py        62  0.13s             0           0
+/opt/airflow/dags/scraping_3.py                              0           0
+/opt/airflow/dags/scraping_2.py                              0           0
+================================================================================
+[2025-01-07T21:59:52.116+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                             PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+----------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/api-timelapse.py     65  0.02s             1           0  0.42s           2025-01-07T21:59:21
+/opt/airflow/dags/scraping_1.py        66  0.01s             1           0  0.42s           2025-01-07T21:59:21
+/opt/airflow/dags/scraping_3.py                              1           0  0.13s           2025-01-07T21:59:21
+/opt/airflow/dags/scraping_2.py                              1           0  0.16s           2025-01-07T21:59:22
+================================================================================
+[2025-01-07T22:00:22.300+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                           PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+----------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/api-timelapse.py                           1           0  0.45s           2025-01-07T21:59:52
+/opt/airflow/dags/scraping_1.py                              1           0  0.43s           2025-01-07T21:59:52
+/opt/airflow/dags/scraping_3.py                              1           0  0.28s           2025-01-07T21:59:52
+/opt/airflow/dags/scraping_2.py                              1           0  0.32s           2025-01-07T21:59:53
+================================================================================
+[2025-01-07T22:00:52.797+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                           PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+----------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/api-timelapse.py                           1           0  0.32s           2025-01-07T22:00:23
+/opt/airflow/dags/scraping_1.py                              1           0  0.32s           2025-01-07T22:00:23
+/opt/airflow/dags/scraping_3.py                              1           0  0.27s           2025-01-07T22:00:23
+/opt/airflow/dags/scraping_2.py                              1           0  0.31s           2025-01-07T22:00:23
+================================================================================
