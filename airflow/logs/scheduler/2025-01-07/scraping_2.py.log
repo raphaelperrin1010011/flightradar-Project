@@ -26,3 +26,31 @@
 [2025-01-07T22:00:54.420+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:00:54.420+0000] {dag.py:3036} INFO - Sync 1 DAGs
 [2025-01-07T22:00:54.438+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:00:54.438+0000] {dag.py:3823} INFO - Setting next_dagrun for filtered_links_2_workflow to None, run_after=None
 [2025-01-07T22:00:54.468+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_2.py took 0.283 seconds
+[2025-01-07T22:01:25.010+0000] {processor.py:161} INFO - Started process (PID=104) to work on /opt/airflow/dags/scraping_2.py
+[2025-01-07T22:01:25.012+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_2.py for tasks to queue
+[2025-01-07T22:01:25.014+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:01:25.014+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_2.py
+[2025-01-07T22:01:25.060+0000] {processor.py:840} INFO - DAG(s) 'filtered_links_2_workflow' retrieved from /opt/airflow/dags/scraping_2.py
+[2025-01-07T22:01:25.247+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:01:25.247+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-07T22:01:25.266+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:01:25.266+0000] {dag.py:3823} INFO - Setting next_dagrun for filtered_links_2_workflow to None, run_after=None
+[2025-01-07T22:01:25.294+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_2.py took 0.290 seconds
+[2025-01-07T22:01:56.063+0000] {processor.py:161} INFO - Started process (PID=116) to work on /opt/airflow/dags/scraping_2.py
+[2025-01-07T22:01:56.065+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_2.py for tasks to queue
+[2025-01-07T22:01:56.068+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:01:56.067+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_2.py
+[2025-01-07T22:01:56.113+0000] {processor.py:840} INFO - DAG(s) 'filtered_links_2_workflow' retrieved from /opt/airflow/dags/scraping_2.py
+[2025-01-07T22:01:56.302+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:01:56.301+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-07T22:01:56.319+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:01:56.319+0000] {dag.py:3823} INFO - Setting next_dagrun for filtered_links_2_workflow to None, run_after=None
+[2025-01-07T22:01:56.348+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_2.py took 0.291 seconds
+[2025-01-07T22:02:26.581+0000] {processor.py:161} INFO - Started process (PID=129) to work on /opt/airflow/dags/scraping_2.py
+[2025-01-07T22:02:26.584+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_2.py for tasks to queue
+[2025-01-07T22:02:26.587+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:02:26.586+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_2.py
+[2025-01-07T22:02:26.634+0000] {processor.py:840} INFO - DAG(s) 'filtered_links_2_workflow' retrieved from /opt/airflow/dags/scraping_2.py
+[2025-01-07T22:02:26.800+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:02:26.800+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-07T22:02:26.816+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:02:26.816+0000] {dag.py:3823} INFO - Setting next_dagrun for filtered_links_2_workflow to None, run_after=None
+[2025-01-07T22:02:26.846+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_2.py took 0.272 seconds
+[2025-01-07T22:02:57.348+0000] {processor.py:161} INFO - Started process (PID=141) to work on /opt/airflow/dags/scraping_2.py
+[2025-01-07T22:02:57.350+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/scraping_2.py for tasks to queue
+[2025-01-07T22:02:57.353+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:02:57.352+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/scraping_2.py
+[2025-01-07T22:02:57.416+0000] {processor.py:840} INFO - DAG(s) 'filtered_links_2_workflow' retrieved from /opt/airflow/dags/scraping_2.py
+[2025-01-07T22:02:57.606+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:02:57.606+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-01-07T22:02:57.625+0000] {logging_mixin.py:188} INFO - [2025-01-07T22:02:57.625+0000] {dag.py:3823} INFO - Setting next_dagrun for filtered_links_2_workflow to None, run_after=None
+[2025-01-07T22:02:57.654+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/scraping_2.py took 0.312 seconds
