@@ -191,13 +191,20 @@ $(document).ready(function() {
             checked.push(parseInt($(this).attr('id')));
         });
     
+        if (checked.length === 4) {
+            alert('Les cases à cocher doivent être consécutives et sont limitées à 3.');
+            // Empêcher la case de changer d'état
+            event.preventDefault();
+            return;
+        }
+
         // Trier les IDs pour vérifier la séquence
         checked.sort((a, b) => a - b);
-    
+        
         // Vérifier si les IDs sont consécutifs
         for (let i = 1; i < checked.length; i++) {
             if (checked[i] !== checked[i - 1] + 1) {
-                alert('Les cases à cocher doivent être consécutives.');
+                alert('Les cases à cocher doivent être consécutives et sont limitées à 3.');
                 // Empêcher la case de changer d'état
                 event.preventDefault();
                 return;
