@@ -183,29 +183,27 @@ $(document).ready(function() {
         updateProgressBar();
     });
 
-    $(document).on('click', '.checkbox-button input[type="checkbox"]', function() {
+    $(document).on('click', '.checkbox-button input[type="checkbox"]', function(event) {
         let checked = [];
         
         // Récupérer tous les IDs des cases à cocher sélectionnées
         $('.checkbox-button input[type="checkbox"]:checked').each(function() {
             checked.push(parseInt($(this).attr('id')));
         });
-
+    
         // Trier les IDs pour vérifier la séquence
         checked.sort((a, b) => a - b);
-
-        // Vérifier si les IDs sont consécutifs à refaire
-        // Vérifier si les IDs sont consécutifs
-        // Vérifier si les IDs sont consécutifs
+    
         // Vérifier si les IDs sont consécutifs
         for (let i = 1; i < checked.length; i++) {
             if (checked[i] !== checked[i - 1] + 1) {
                 alert('Les cases à cocher doivent être consécutives.');
-                $(this).prop('checked', false);
+                // Empêcher la case de changer d'état
+                event.preventDefault();
                 return;
             }
         }
-    }); 
+    });
 });
 
 let map = L.map('map', {
